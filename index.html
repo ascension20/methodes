@@ -1,0 +1,1545 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ascension 20 — Méthodes de Révision</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0c0c0e;
+    --surface: #111113;
+    --surface2: #17171a;
+    --border: #222226;
+    --border2: #2e2e34;
+    --text: #ede8df;
+    --muted: #706a5e;
+    --muted2: #3d3a33;
+
+    /* Brand gold — signature Ascension */
+    --gold: #c9973a;
+    --gold-light: #e8b84b;
+    --gold-dim: rgba(201,151,58,0.12);
+    --gold-glow: rgba(201,151,58,0.05);
+
+    /* Classe colors — distinctes et cohérentes */
+    --seconde: #7eb8d4;      /* bleu clair - début du lycée, calme */
+    --premiere: #c9973a;     /* or - milieu, l'identité Ascension */
+    --terminale: #c97a5a;    /* terracotta/cuivre - intensité, objectif bac */
+
+    /* Méthode tags */
+    --ai: #9b8ecf;           /* violet discret - IA */
+    --active: #6aab8e;       /* vert sauge - rappel actif */
+    --spaced: #c9973a;       /* or - répétition espacée = valeur long terme */
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Gold grain texture overlay */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 999;
+    mix-blend-mode: overlay;
+  }
+
+  /* ─── HEADER ─────────────────────────────── */
+  header {
+    padding: 3.5rem 2rem 0;
+    text-align: center;
+    position: relative;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%; transform: translateX(-50%);
+    width: 600px; height: 300px;
+    background: radial-gradient(ellipse at center, rgba(201,151,58,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .logo-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.15rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .logo-ascension {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .logo-divider {
+    width: 32px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    margin: 0.3rem auto;
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    font-weight: 700;
+    line-height: 0.95;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    margin-bottom: 0.2rem;
+  }
+
+  h1 span {
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  .subtitle {
+    color: var(--muted);
+    font-size: 0.88rem;
+    max-width: 460px;
+    margin: 1rem auto 0.75rem;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .ai-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(155,142,207,0.1);
+    border: 1px solid rgba(155,142,207,0.25);
+    color: var(--ai);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.62rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.9rem;
+    border-radius: 100px;
+    margin-bottom: 2.5rem;
+  }
+
+  /* ─── MAIN TABS ───────────────────────────── */
+  .main-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 0.4rem;
+    margin-bottom: 3.5rem;
+    flex-wrap: wrap;
+    padding: 0 1rem;
+  }
+
+  .main-tab {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.55rem 1.4rem;
+    border-radius: 100px;
+    border: 1px solid var(--border2);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.18s ease;
+  }
+
+  .main-tab:hover { border-color: var(--muted); color: var(--text); }
+  .main-tab.active[data-tab="general"]  { background: rgba(201,151,58,0.1);   border-color: var(--gold);      color: var(--gold); }
+  .main-tab.active[data-tab="seconde"]  { background: rgba(126,184,212,0.1);  border-color: var(--seconde);   color: var(--seconde); }
+  .main-tab.active[data-tab="premiere"] { background: rgba(201,151,58,0.1);   border-color: var(--premiere);  color: var(--premiere); }
+  .main-tab.active[data-tab="terminale"]{ background: rgba(201,122,90,0.1);   border-color: var(--terminale); color: var(--terminale); }
+
+  /* ─── CONTENT ─────────────────────────────── */
+  .content {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem 6rem;
+  }
+
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ─── GENERAL SECTION ─────────────────────── */
+  .general-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.2rem;
+    margin-bottom: 2rem;
+  }
+
+  .general-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.4rem;
+    transition: border-color 0.2s;
+  }
+
+  .general-card:hover { border-color: var(--border2); }
+
+  .gen-icon {
+    font-size: 1rem;
+    margin-bottom: 0.85rem;
+    display: block;
+    color: var(--gold);
+    opacity: 0.7;
+  }
+
+  .gen-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.01em;
+    color: var(--text);
+  }
+
+  .gen-body {
+    font-size: 0.78rem;
+    color: #857f72;
+    line-height: 1.7;
+  }
+
+  .gen-body strong { color: var(--text); font-weight: 500; }
+
+  .gen-highlight {
+    border-left: 2px solid var(--gold);
+    background: rgba(201,151,58,0.04);
+  }
+
+  /* ─── SUBJECT GRID ────────────────────────── */
+  .subject-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+    gap: 1.3rem;
+  }
+
+  /* ─── SUBJECT CARD ────────────────────────── */
+  .subject-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.18s ease, border-color 0.18s ease;
+  }
+
+  .subject-card:hover { transform: translateY(-3px); border-color: var(--border2); }
+
+  .card-header {
+    padding: 1.1rem 1.4rem 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .subject-emoji {
+    font-size: 1.4rem;
+    width: 40px; height: 40px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--surface2);
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+
+  .subject-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    line-height: 1.2;
+    color: var(--text);
+  }
+
+  .card-body { padding: 0.2rem 0; }
+
+  /* ─── METHOD ROW ──────────────────────────── */
+  .method {
+    display: flex;
+    gap: 0.85rem;
+    padding: 0.85rem 1.4rem;
+    border-bottom: 1px solid #141416;
+    transition: background 0.12s;
+  }
+
+  .method:last-child { border-bottom: none; }
+  .method:hover { background: #131315; }
+
+  .method.hot {
+    border-left: 2px solid var(--ai);
+    padding-left: calc(1.4rem - 2px);
+    background: rgba(155,142,207,0.04);
+  }
+
+  .method.hot:hover { background: rgba(155,142,207,0.08); }
+
+  .m-icon {
+    font-size: 0.7rem;
+    flex-shrink: 0;
+    margin-top: 0.2rem;
+    width: 18px;
+    text-align: center;
+    color: var(--gold);
+    opacity: 0.6;
+  }
+
+  .m-body {}
+
+  .m-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    margin-bottom: 0.3rem;
+    line-height: 1.3;
+    color: var(--text);
+  }
+
+  .m-desc {
+    font-size: 0.75rem;
+    color: #756f62;
+    line-height: 1.65;
+    font-weight: 300;
+  }
+
+  .m-desc strong { color: #c8bfad; font-weight: 500; }
+
+  .tags { margin-top: 0.4rem; display: flex; gap: 0.35rem; flex-wrap: wrap; }
+
+  .tag {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.56rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.15rem 0.55rem;
+    border-radius: 100px;
+  }
+
+  .tag-ai     { background: rgba(155,142,207,0.12); color: var(--ai); }
+  .tag-active { background: rgba(106,171,142,0.12); color: var(--active); }
+  .tag-spaced { background: rgba(201,151,58,0.12);  color: var(--spaced); }
+
+  /* color bars per class — all gold variants */
+  .bar-seconde  { height: 2px; background: linear-gradient(to right, var(--seconde), transparent); }
+  .bar-premiere { height: 2px; background: linear-gradient(to right, var(--premiere), transparent); }
+  .bar-terminale{ height: 2px; background: linear-gradient(to right, var(--terminale), transparent); }
+
+  /* ─── SECTION LABEL ───────────────────────── */
+  .section-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.62rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted2);
+    margin-bottom: 1.4rem;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+  }
+
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  /* legend */
+  .legend {
+    display: flex;
+    gap: 1.1rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+
+  .leg-item {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.68rem;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  .leg-dot { width: 7px; height: 7px; border-radius: 50%; }
+
+  .logo-img {
+    width: 150px;
+    height: 80px;
+    background-color: white;
+    background-image: url('data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAJUAwYDASIAAhEBAxEB/8QAHQABAAEEAwEAAAAAAAAAAAAAAAcBBQYIAgQJA//EAF0QAAEDAwIDAwcFCQ0EBwgBBQEAAgMEBREGIQcSMQhBURMiYXGBkbEUFSMyoRc1NkJScnOS0QkWJDM0N1RVYnSTssFTdYKzJSY4Q0VWlBgoREZjg5XhJ1dkZaLw/8QAGwEBAAIDAQEAAAAAAAAAAAAAAAECAwUGBAf/xAA0EQEAAgIBAwMDAgUEAgIDAAAAAQIDEQQFITESE0EGIlEUcTIzNGGBJEJSkRUjNVOhsdH/2gAMAwEAAhEDEQA/ANy0REBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQFR3ToqqhUBnbYKo6LEuLGsaLQmha/UNbK1giZyQ8x2MpB5AfbhWLs88So+JWhobpM6EXCPDKpkYwA/GTgdwUiSkREBERAREQERdW73GitNsqLncqllNR00Zkmmf8AVY0dSUHaRWXSOq9O6tt3zhpu701zpA4t8rASW5HUbq9ICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiFAVH4AydgEysA49a4p9CcPa67SSctQ6Nzadud3O26e9ES1X7cXEg3zUrNH22p/gdCf4U0bh78gtPsWJdkniK7RfEGCiq5/JW64uETw4+a0k/W+xQ/ebhU3W6VFxrJHSzzyFznu67ldTfO2dlfXZD17hljngjmieHRvaHtI7wRkL6DooT7I3EhuuOHcNFWzNN1tw8lJGDnETfNZ9gU2dyrKYFVUVVCRERAKwDtDVDKbg3qfnOPKUEjR7ln56KDO2pfmWbhDLE5x5qyXyGB6QUGN9gGqa7hrUUgOTHUSP8Ae4LZdaY/uel/5btfbHM9rYxAx8Iz1cXnPwW52UkETKZQEREBEyiAiIgImd0ygImUQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAQ9EQ9N0HDIAy4jbqV59dsfiXJrDX8ljt1WH2e24aGt/wBsMtfk+wLa/tQcQYdC8N6t8cvLXVjTBT4+s1xBw7C83auomq6qWpqHl80zy97j3knJVqwiXy7t98dVTc5Gdu5V9Xf1QdMdyuhJ/Zr1/LoPiNR1b5wy31LhFVN6cw6D7SvSmhqYayjiqYX88crQ5rgeuV5EMc5jmuac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NiIisCIiCha09Wgqnk4/yG+5ckVZrWfMG3Hycf5DfcqhrR0ACqiRWI8QbcSxh6tB9ieTj/Ib7lyRPRX8J3Lj5Nn5A9yeTZ+Q33Lkiemv4Rtx5Gfkj3KoAHQKqJ6Y/BsREVgQgFEQcTGw/iN9yeTj/Ib7lyRV9FfwncuPk2fkN9yeTZ+Q33Lkiemv4Rtx8mz8hvuTycf5DfcuSJ6K/hO5cfJx/kN9y5YHgiKYrEeIRtxMbD+I33II4/yG+5ckUeiv4TuVA1o6NAVURWiNIEREBERAIB6jK4+Tj/Ib7lyRRNYnzA4+Tj/Ib7lUNaOgAVUURWI8QbULGnq0H2Knk4/yG+5ckSa1nzCdy4iNg6Mb7lyRFMREeECIhUhthfCppoZ2FskTXDwK+3duqHdUtSt+0nqmvhZqrT9jk5nT0MJA3JcFhuoZ9NUlQKa30NKZycc5Jw325WV6qtl1uYZBRVbKeEg+UJByT6wsW+5xI480laxzvHfqud6jivM+jBj/AMtpxLY4+7Jd99NHTVteJZKhklS855jjzfQsxpbxapQPJVkBz3cwUeVfD24QsLoaiOU9wDTlY9X2e7W05mppowPxh0Xgpz+XwI9Ps7h654uDkzuuROMc8UgyyRrvUV9AVA0V0uNPjkrJm+guKulJrC+UzABNHJ+c3OF6sX1Pi8ZK6Yb9GyR/DO0ynbwwvnE9knMWuBGcYHio8sl71HqGcQHkjp8+e9jcHHoKkCigbTwNjbkgDr3k+K3fD5kcuPVSNV/u12bjzhnVp7vuN1UgEbjKoOqrhe6YiezzQ6dXbqOqGJ6djwfEK3v0rYXO5jbIM+O6vhVO5YLcbFPmrJGW8eJdCis9uoyDT0kbCOhAXfaAO4BVxlAslMVaeIRNpnyqERFkVULQeoBVPJx/kN9y5IqzWJ8wbcfJx/kN9ycjPyG+5ckT0V/CduPk2fkD3J5OP8hvuXJE9Ffwblx8nH+Q33IGMByGgLkieiv4NyIiKyBERAREQEREBERAREQEREBERAREQUJTKqm6jwOO6qMqoRTs2FN0RQCIikEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBEQoKImEwgetBhACmE8gV8pYIpRiSNrh6RlfUKuFWaxPaUxMx4WG4aVs1YS+WmAd4tOF0IdDWVknO6IkA9OYrLMelAF47dN4treqaRtnry81Y1FpdWio6ajiEVPE1jRsMBdoIBuq43XspSKR6ax2eeZmZ3MqBVTvRWFCibpgoAVUCIgRERIiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiIP//Z');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 12px;
+    padding: 0;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-area">
+    <div class="logo-img" role="img" aria-label="Ascension Académique"></div>
+  </div>
+  <h1>Ascension <span>20</span></h1>
+  <p class="subtitle">Uniquement les méthodes qui marchent — rappel actif, répétition espacée, et IA comme partenaire de révision.</p>
+  <div class="ai-pill">✦ Intègre l'IA comme outil de révision</div>
+
+  <div class="main-tabs">
+    <button class="main-tab active" data-tab="general" onclick="switchTab('general')">⚡ Conseils généraux</button>
+    <button class="main-tab" data-tab="seconde" onclick="switchTab('seconde')">Seconde</button>
+    <button class="main-tab" data-tab="premiere" onclick="switchTab('premiere')">Première</button>
+    <button class="main-tab" data-tab="terminale" onclick="switchTab('terminale')">Terminale</button>
+  </div>
+</header>
+
+<div class="content">
+
+  <!-- ══════════════════════════════════════════
+       GENERAL
+  ══════════════════════════════════════════ -->
+  <div class="panel active" id="panel-general">
+    <div class="section-label">Principes universels — toutes classes</div>
+    <div class="general-grid">
+
+      <div class="general-card gen-highlight">
+        <span class="gen-icon">✦</span>
+        <div class="gen-title">La révision active, pas passive</div>
+        <div class="gen-body">Relire ses cours ne sert <strong>presque à rien</strong>. Ce qui ancre durablement : se tester, reformuler, reproduire sans support. <strong>La règle : si tu n'as pas fermé ton cours pour te tester, tu n'as pas révisé.</strong> Ferme, teste-toi, vérifie ce qui manque, recommence.</div>
+      </div>
+
+      <div class="general-card gen-highlight">
+        <span class="gen-icon">✦</span>
+        <div class="gen-title">La répétition espacée (Anki)</div>
+        <div class="gen-body">Le cerveau oublie selon une courbe prévisible. <strong>Réviser juste avant d'oublier</strong> = mémorisation longue durée avec un minimum d'effort. Installe Anki, crée tes flashcards (ou génère-les avec l'IA), fais 15 min par jour. Un lycéen qui utilise Anki sérieusement <strong>a 3x moins à réviser en période d'exam</strong> qu'un lycéen qui ne l'utilise pas.</div>
+      </div>
+
+      <div class="general-card gen-highlight">
+        <span class="gen-icon">✦</span>
+        <div class="gen-title">Faire des annales d'abord</div>
+        <div class="gen-body">Avant de réviser un chapitre, <strong>regarde les annales</strong>. Ce que l'exam demande réellement ≠ ce que le cours contient. Identifier les types de questions, la structure attendue, le vocabulaire évalué = <strong>réviser ce qui compte, pas tout</strong>. C'est la différence entre 4 heures efficaces et 10 heures perdues.</div>
+      </div>
+
+      <div class="general-card gen-highlight">
+        <span class="gen-icon">✦</span>
+        <div class="gen-title">La règle des 80/20</div>
+        <div class="gen-body">Dans chaque matière, <strong>20% des notions tombent dans 80% des examens</strong>. Identifie ces 20% (annales + correction des DS) et maîtrise-les à 100% avant de t'attaquer au reste. Un élève qui maîtrise parfaitement les fondamentaux bat un élève qui survole tout.</div>
+      </div>
+
+      <div class="general-card">
+        <span class="gen-icon">✦</span>
+        <div class="gen-title">L'IA comme prof disponible 24h/24</div>
+        <div class="gen-body">Utilise l'IA pour <strong>trois choses précises</strong> : (1) te faire interroger sur un chapitre, (2) critiquer tes productions écrites, (3) générer des exercices ou flashcards ciblés. <strong>Ne lui demande pas de faire à ta place</strong> — demande-lui de créer les conditions pour que tu travailles toi-même.</div>
+      </div>
+
+      <div class="general-card">
+        <span class="gen-icon">✦</span>
+        <div class="gen-title">Blocs de travail courts et intenses</div>
+        <div class="gen-body">25-50 min de travail <strong>sans téléphone, sans onglets inutiles</strong>, pause de 10 min. Répété 3-4 fois = une session efficace. Travailler 3h de façon concentrée vaut largement plus que 7h de travail dilué. <strong>Quantifie ta session avant de commencer</strong> : "je vais refaire 8 exos sur les suites."</div>
+      </div>
+
+      <div class="general-card">
+        <span class="gen-icon">✦</span>
+        <div class="gen-title">Le journal d'erreurs</div>
+        <div class="gen-body">Un cahier dédié : chaque erreur → <strong>type d'erreur → cause racine → règle à retenir</strong>. Relis ce journal la veille de chaque exam, pas tes cours. Ce que tu rates régulièrement = ce qui peut te coûter des points. Ce que tu réussis déjà = ne pas perdre de temps à le réviser.</div>
+      </div>
+
+      <div class="general-card">
+        <span class="gen-icon">✦</span>
+        <div class="gen-title">Gérer son temps en exam : ne jamais s'acharner</div>
+        <div class="gen-body">Si une question bloque après 5 min, <strong>passe à la suivante et reviens à la fin.</strong> Les questions difficiles en début de sujet font perdre du temps sur des questions faciles en fin. Souvent, les dernières questions d'un exercice sont plus accessibles qu'elles n'y paraissent une fois le reste traité. <strong>Note la question skippée pour ne pas l'oublier.</strong></div>
+      </div>
+
+      <div class="general-card">
+        <span class="gen-icon">✦</span>
+        <div class="gen-title">Être actif en cours pour gagner du temps</div>
+        <div class="gen-body">La meilleure façon de réduire le temps de révision, c'est de <strong>comprendre en cours plutôt qu'après.</strong> Pose des questions, refais les exemples du prof dans ta tête, note ce que tu n'as pas compris immédiatement — pas le cours en entier. Un élève qui suit activement en cours a déjà fait 50% du travail de révision. <strong>Ce qui est compris en classe n'est pas à réapprendre chez soi.</strong></div>
+      </div>
+
+      <div class="general-card">
+        <span class="gen-icon">✦</span>
+        <div class="gen-title">Comprendre les attentes avant tout</div>
+        <div class="gen-body">Chaque matière a un <strong>format d'évaluation précis</strong> avec ses critères implicites. Connais-les avant de réviser : en histoire-géo on attend un plan structuré et des exemples précis, en maths une rédaction rigoureuse étape par étape, en SVT une démarche scientifique. <strong>Réviser sans connaître les attentes = travailler dans le vide.</strong></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SECONDE
+  ══════════════════════════════════════════ -->
+    <div class="panel" id="panel-seconde">
+    <div class="legend">
+      <div class="leg-item"><div class="leg-dot" style="background:var(--ai)"></div> IA</div>
+      <div class="leg-item"><div class="leg-dot" style="background:var(--active)"></div> Rappel actif</div>
+      <div class="leg-item"><div class="leg-dot" style="background:var(--spaced)"></div> Répétition espacée</div>
+    </div>
+    <div class="section-label">Seconde — tronc commun</div>
+    <div class="subject-grid">
+
+      <div class="subject-card">
+        <div class="bar-seconde"></div>
+        <div class="card-header">
+          <div class="subject-emoji">Mx</div>
+          <div><div class="subject-name">Mathématiques</div></div>
+        </div>
+        <div class="card-body">
+          <div class="method hot">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">L'IA t'interroge sur un chapitre</div>
+              <div class="m-desc"><strong>"Tu es un prof de maths seconde. Pose-moi 6 exercices progressifs sur [chapitre]. Corrige ma démarche à chaque fois, pas juste le résultat."</strong> Rejoue jusqu'à zéro erreur.</div>
+              <div class="tags"><span class="tag tag-ai">IA</span><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Exos en boucle, cours appris en faisant</div>
+              <div class="m-desc">Ne lis pas le cours d'abord. <strong>Lance-toi directement dans les exercices.</strong> Quand tu bloques, regarde uniquement la notion qui manque, puis continue. Tu assimiles le cours en contexte — ça reste infiniment mieux.</div>
+              <div class="tags"><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Refaire les exos ratés à blanc</div>
+              <div class="m-desc">Pour chaque exo raté : <strong>attends 24h, puis refais-le de mémoire</strong> sans regarder la correction. Ce que tu rates encore = priorité absolue. Ce que tu réussis = acquis.</div>
+              <div class="tags"><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Vérifier ses résultats par estimation</div>
+              <div class="m-desc">Après chaque calcul, prends 10 secondes : <strong>est-ce que ce résultat a un sens ?</strong> Une vitesse de 10 000 m/s, une probabilité de 1,4, une longueur négative — ce sont des signaux d'erreur. Développer ce réflexe en seconde évite des erreurs bêtes toute la scolarité.</div>
+              <div class="tags"><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Flashcards formules sur Anki</div>
+              <div class="m-desc">Génère tes flashcards avec l'IA : <strong>"Fais-moi 15 flashcards Q/R sur les formules et identités remarquables de seconde."</strong> 10 min par jour sur Anki = plus jamais de trou sur les formules.</div>
+              <div class="tags"><span class="tag tag-ai">IA</span><span class="tag tag-spaced">répétition espacée</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subject-card">
+        <div class="bar-seconde"></div>
+        <div class="card-header">
+          <div class="subject-emoji">PC</div>
+          <div><div class="subject-name">Physique-Chimie</div></div>
+        </div>
+        <div class="card-body">
+          <div class="method hot">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">L'IA génère des contrôles complets sur chaque chapitre</div>
+              <div class="m-desc"><strong>"Génère un contrôle de physique-chimie niveau seconde sur [chapitre], durée 45 min. Inclus un QCM, un exercice de calcul et une question de raisonnement. Corrige-moi ensuite question par question en expliquant mes erreurs."</strong> Refais jusqu'à 18+ sans erreur de méthode.</div>
+              <div class="tags"><span class="tag tag-ai">IA</span><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Maîtriser les 5 étapes de résolution jusqu'à l'automatisme</div>
+              <div class="m-desc">À chaque exercice, sans exception : <strong>données → inconnue → loi → formule littérale → application numérique + unité.</strong> Un élève qui fait ça systématiquement ramasse presque tous les points de démarche même s'il se trompe dans le calcul final. C'est la différence entre 12 et 18.</div>
+              <div class="tags"><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Refaire à blanc les exos ratés — après 24h minimum</div>
+              <div class="m-desc">Chaque exo raté : lis la correction, <strong>attends 24h, puis refais de zéro sans regarder.</strong> Passé ce délai tu ne te souviens plus de la solution — tu es forcé de reconstruire le raisonnement. Si tu rates encore, recommence le surlendemain.</div>
+              <div class="tags"><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Flashcards : loi + quand l'utiliser + erreur classique</div>
+              <div class="m-desc">Une flashcard par loi. Recto : nom. Verso : formule + <strong>dans quel contexte l'appliquer + l'erreur que font tous les élèves.</strong> Demande à l'IA de les générer : <strong>"Génère des flashcards sur les lois de [chapitre] avec le contexte d'application et le piège classique pour chacune."</strong></div>
+              <div class="tags"><span class="tag tag-ai">IA</span><span class="tag tag-spaced">répétition espacée</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subject-card">
+        <div class="bar-seconde"></div>
+        <div class="card-header">
+          <div class="subject-emoji">Fr</div>
+          <div><div class="subject-name">Français</div></div>
+        </div>
+        <div class="card-body">
+          <div class="method hot">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">L'IA corrige tes paragraphes</div>
+              <div class="m-desc">Écris un paragraphe de commentaire, colle-le : <strong>"Évalue ce paragraphe niveau seconde — structure, argument, vocabulaire littéraire. Dis-moi exactement ce qui manque."</strong></div>
+              <div class="tags"><span class="tag tag-ai">IA</span><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Analyse à blanc sur texte inconnu</div>
+              <div class="m-desc">Demande à l'IA un texte littéraire inédit du même siècle que le programme. Analyse-le seul. <strong>Compare ensuite avec l'analyse de l'IA</strong> et identifie ce que tu as manqué.</div>
+              <div class="tags"><span class="tag tag-ai">IA</span><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Rédiger une intro de commentaire chronométrée</div>
+              <div class="m-desc">Prends un texte du cours, chronomètre 30 min, rédige l'introduction complète : accroche + présentation du texte + axes de lecture. <strong>Si l'intro n'est pas structurée et fluide en 30 min, c'est la première chose à travailler.</strong> Soumet ensuite à l'IA pour correction.</div>
+              <div class="tags"><span class="tag tag-ai">IA</span><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Flashcards vocabulaire d'analyse littéraire</div>
+              <div class="m-desc">Recto : nom du procédé ou terme (métaphore, anaphore, ironie, champ lexical, modalisation, registre...). Verso : définition courte + exemple tiré d'un texte du cours. <strong>L'objectif n'est pas d'en avoir 50 — c'est de maîtriser parfaitement ceux qui reviennent tout le temps.</strong> Révise sur Anki jusqu'à les utiliser naturellement dans tes analyses sans avoir à chercher.</div>
+              <div class="tags"><span class="tag tag-spaced">répétition espacée</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subject-card">
+        <div class="bar-seconde"></div>
+        <div class="card-header">
+          <div class="subject-emoji">HG</div>
+          <div><div class="subject-name">Histoire-Géographie</div></div>
+        </div>
+        <div class="card-body">
+          <div class="method hot">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Apprendre le plan du cours, pas le cours</div>
+              <div class="m-desc">En histoire-géo, <strong>la structure prime sur les détails.</strong> Mémorise d'abord le plan complet (titres de parties et sous-parties) avant d'apprendre les faits. Un plan solide en tête = tu ne perds jamais le fil en exam.</div>
+              <div class="tags"><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Feuille blanche : restituer le cours sans support</div>
+              <div class="m-desc">Ferme tout. Prends une feuille vierge, reconstitue le plan du chapitre puis remplis chaque partie avec les faits, dates et acteurs que tu te rappelles. <strong>Ce qui est vide sur ta feuille = ce que tu dois retravailler.</strong></div>
+              <div class="tags"><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">L'IA pose des questions sur ton chapitre</div>
+              <div class="m-desc"><strong>"Pose-moi 8 questions de contrôle niveau seconde sur [chapitre], mélange faits, dates, acteurs et mécanismes. Corrige mes réponses et explique ce que j'ai raté."</strong> À faire après la feuille blanche pour cibler ce qui manque encore.</div>
+              <div class="tags"><span class="tag tag-ai">IA</span><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Expliquer le cours à l'oral, sans support</div>
+              <div class="m-desc">Ferme tout et explique le chapitre à voix haute comme si tu le faisais à quelqu'un qui ne connaît rien. <strong>Ce que tu bafouilles ou esquives = ce que tu n'as pas vraiment compris.</strong> Plus efficace que la feuille blanche pour détecter les faux acquis — on peut écrire des mots sans comprendre, mais on ne peut pas l'expliquer sans comprendre.</div>
+              <div class="tags"><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Anki : dates, acteurs, lieux-clés</div>
+              <div class="m-desc">Une flashcard = un fait précis. <strong>10 min par jour en répétition espacée</strong> = mémorisation durable sans session de bourrage la veille.</div>
+              <div class="tags"><span class="tag tag-spaced">répétition espacée</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subject-card">
+        <div class="bar-seconde"></div>
+        <div class="card-header">
+          <div class="subject-emoji">SV</div>
+          <div><div class="subject-name">SVT</div></div>
+        </div>
+        <div class="card-body">
+          <div class="method hot">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">L'IA teste ta vraie compréhension</div>
+              <div class="m-desc"><strong>"Demande-moi d'expliquer [mécanisme]. Puis pose-moi 3 questions pour vérifier si j'ai compris la logique, pas juste mémorisé les mots."</strong></div>
+              <div class="tags"><span class="tag tag-ai">IA</span><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Redessiner les schémas de mémoire</div>
+              <div class="m-desc">Ferme le cours, redessine chaque schéma clé entièrement. <strong>Si tu ne peux pas le dessiner, tu ne l'as pas compris</strong> — tu l'as juste regardé.</div>
+              <div class="tags"><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">S'entraîner à l'analyse de documents SVT</div>
+              <div class="m-desc">Les exercices SVT comportent souvent des documents (graphiques, schémas, résultats d'expérience). Méthode : <strong>(1) lire le document et identifier ce qu'il montre, (2) extraire la donnée principale avec un chiffre précis si possible, (3) interpréter en lien avec le cours — pourquoi ce résultat ?, (4) conclure en répondant à la question posée.</strong> Entraîne-toi sur les documents du cours en les analysant à blanc avant de regarder les réponses.</div>
+              <div class="tags"><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Glossaire scientifique sur Anki via l'IA</div>
+              <div class="m-desc"><strong>"Génère 25 flashcards définition/terme sur [chapitre] en SVT seconde."</strong> Un mot précis en exam = points assurés. Révise jusqu'à définition parfaite.</div>
+              <div class="tags"><span class="tag tag-ai">IA</span><span class="tag tag-spaced">répétition espacée</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subject-card">
+        <div class="bar-seconde"></div>
+        <div class="card-header">
+          <div class="subject-emoji">EN</div>
+          <div><div class="subject-name">Anglais</div></div>
+        </div>
+        <div class="card-body">
+          <div class="method hot">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Conversations en anglais avec l'IA</div>
+              <div class="m-desc"><strong>"Let's practice English. Talk to me about [thème du cours] and strictly correct my grammar and vocabulary mistakes after each message."</strong> À l'infini, sans jugement, à n'importe quelle heure.</div>
+              <div class="tags"><span class="tag tag-ai">IA</span><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Correction de productions écrites</div>
+              <div class="m-desc">Écris un résumé en anglais, colle-le : <strong>"Correct this. List my 5 main mistakes and explain why they're wrong."</strong> Feedback ciblé immédiat.</div>
+              <div class="tags"><span class="tag tag-ai">IA</span><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Entraîner la compréhension orale activement</div>
+              <div class="m-desc">Écoute 10 min par jour d'un podcast ou d'une vidéo en anglais sur les thèmes du cours (BBC Learning English, TED-Ed...). <strong>Après l'écoute, note 5 idées principales en anglais de mémoire</strong> sans relire. Le seul vrai moyen de progresser à l'oral.</div>
+              <div class="tags"><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">5 expressions avancées par thème</div>
+              <div class="m-desc">Par notion, mémorise 5 expressions ou collocations avancées sur Anki. <strong>En exam, une expression précise vaut 3 mots basiques.</strong></div>
+              <div class="tags"><span class="tag tag-spaced">répétition espacée</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       PREMIERE
+  ══════════════════════════════════════════ -->
+    <div class="panel" id="panel-premiere">
+    <div class="legend">
+      <div class="leg-item"><div class="leg-dot" style="background:var(--ai)"></div> IA</div>
+      <div class="leg-item"><div class="leg-dot" style="background:var(--active)"></div> Rappel actif</div>
+      <div class="leg-item"><div class="leg-dot" style="background:var(--spaced)"></div> Répétition espacée</div>
+    </div>
+    <div class="section-label">Première — avec spécialités</div>
+    <div class="subject-grid">
+
+      <div class="subject-card">
+        <div class="bar-premiere"></div>
+        <div class="card-header">
+          <div class="subject-emoji">Fr</div>
+          <div><div class="subject-name">Français (EAF)</div></div>
+        </div>
+        <div class="card-body">
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title" style="color:var(--gold);font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;font-family:'DM Sans',sans-serif;font-weight:500;">— Oral EAF</div>
+            </div>
+          </div>
+          <div class="method hot">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Explication linéaire à blanc, chronométrée</div>
+              <div class="m-desc">Prends un texte au programme. Ferme tes notes. Fais l'explication linéaire complète à voix haute — mouvements, procédés, interprétations — en 10 min chrono. <strong>Ce que tu ne peux pas formuler seul, le jury te le fera remarquer.</strong> L'IA peut ensuite évaluer ta précision : "Voici mon explication de [texte], dis-moi ce qui manque."</div>
+              <div class="tags"><span class="tag tag-ai">IA</span><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Simulation d'entretien EAF sur l'œuvre choisie</div>
+              <div class="m-desc"><strong>"Tu es examinateur au bac de français. Je viens de présenter un texte de [titre de l'œuvre choisie]. Pose-moi 3 questions de relance sur cette œuvre et évalue mes réponses."</strong> Répète jusqu'à tenir les 10 min de présentation + 10 min d'échange sans stress.</div>
+              <div class="tags"><span class="tag tag-ai">IA</span><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title" style="color:var(--gold);font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;font-family:'DM Sans',sans-serif;font-weight:500;">— Écrit</div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Maîtriser la structure du commentaire composé</div>
+              <div class="m-desc">Pour ceux qui visent le commentaire : entraîne-toi sur la <strong>construction des axes d'abord</strong> — deux ou trois axes thématiques cohérents avec le texte, chacun avec 2 sous-parties. Soumets ton plan à l'IA : <strong>"Voici mon plan de commentaire sur [texte]. Les axes sont-ils pertinents, équilibrés, et bien distincts ?"</strong></div>
+              <div class="tags"><span class="tag tag-ai">IA</span><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Plan de dissertation détaillé, puis comparaison IA</div>
+              <div class="m-desc">Fais un plan complet : <strong>grandes parties → sous-parties → idée principale de chaque sous-partie → exemple associé.</strong> Puis demande à l'IA le sien. Compare : quels arguments as-tu manqués, quels exemples sont plus pertinents ? Ne lui demande jamais le plan avant d'avoir essayé.</div>
+              <div class="tags"><span class="tag tag-ai">IA</span><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Citations classées par thème sur Anki</div>
+              <div class="m-desc">15-20 citations par œuvre, classées par thème (amour, pouvoir, mort...). <strong>Objectif : sortir une citation en 10 secondes sur n'importe quel thème</strong> — indispensable en dissertation comme en commentaire.</div>
+              <div class="tags"><span class="tag tag-spaced">répétition espacée</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subject-card">
+        <div class="bar-premiere"></div>
+        <div class="card-header">
+          <div class="subject-emoji">Mx</div>
+          <div><div class="subject-name">Maths (spécialité)</div></div>
+        </div>
+        <div class="card-body">
+          <div class="method hot">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Se mettre en conditions d'exam sur sujets entiers</div>
+              <div class="m-desc">La compétence clé en maths spé première c'est tenir un sujet complet dans le temps imparti. <strong>Prends des sujets de première spé maths (annales ou DS), chronomètre-toi, aucune aide.</strong> Corrige-toi toi-même avant de regarder le corrigé — l'écart = exactement ce que tu dois retravailler.</div>
+              <div class="tags"><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Exos en boucle, cours consulté au besoin</div>
+              <div class="m-desc"><strong>Ne lis pas le cours avant de faire les exos.</strong> Lance-toi, bloque, consulte uniquement ce qui manque, continue. Tu apprends le cours en contexte — 3x plus efficace que de le lire d'abord.</div>
+              <div class="tags"><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Refaire les DS notés 48h après</div>
+              <div class="m-desc">Après chaque DS rendu : lis la correction, puis <strong>refais l'intégralité du DS 48h plus tard sans regarder</strong>. Pas juste les questions ratées — tout. Les questions réussies par instinct peuvent cacher des fragilités.</div>
+              <div class="tags"><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">5-10 min de réflexion, puis l'IA donne une piste</div>
+              <div class="m-desc">Sur un exo bloqué : <strong>réfléchis seul 5 à 10 min.</strong> Passé ce délai, demande à l'IA : <strong>"Voici mon raisonnement. Trouve l'erreur de logique sans me donner la réponse."</strong> Tu corriges toi-même — c'est ça qui reste.</div>
+              <div class="tags"><span class="tag tag-ai">IA</span><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Journal d'erreurs : cause racine de chaque faute</div>
+              <div class="m-desc">Pour chaque exo raté : note le type d'erreur et sa cause racine. <strong>Relis ce journal avant chaque DS</strong> — c'est là que sont tes points perdus.</div>
+              <div class="tags"><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subject-card">
+        <div class="bar-premiere"></div>
+        <div class="card-header">
+          <div class="subject-emoji">SE</div>
+          <div><div class="subject-name">SES (spécialité)</div></div>
+        </div>
+        <div class="card-body">
+          <div class="method hot">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Entraînement EC1 : définir + mobiliser</div>
+              <div class="m-desc">L'EC1 demande définition + mécanisme illustré. <strong>"Donne-moi 5 questions d'EC1 niveau première SES sur [thème]. Corrige mes réponses en précisant si la définition est exacte et si le mécanisme est bien articulé."</strong></div>
+              <div class="tags"><span class="tag tag-ai">IA</span><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">EC2 : commenter un doc statistique à blanc</div>
+              <div class="m-desc">Prends un tableau ou graphique du cours, cache la légende. Rédige ton EC2 : lecture → variations → interprétation → limite. <strong>Puis soumets à l'IA pour critique point par point.</strong> L'EC2 s'apprend par la pratique, pas par la théorie.</div>
+              <div class="tags"><span class="tag tag-ai">IA</span><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">EC3 : plan + intro chronométrés (20 min)</div>
+              <div class="m-desc">Sur un sujet d'EC3 passé, fais plan + intro en 20 min. <strong>Compare avec un corrigé.</strong> En première, l'EC3 est une mini-dissertation : maîtriser la structure avant de travailler le fond.</div>
+              <div class="tags"><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Mémoriser qui citer sur quoi en EC3</div>
+              <div class="m-desc">Pour chaque grand thème SES, construis un tableau : <strong>thème → auteur → thèse en 1 phrase → œuvre.</strong> En EC3, citer un auteur avec précision fait passer de 10 à 16. Génère le tableau avec l'IA, vérifie-le, révise sur Anki.</div>
+              <div class="tags"><span class="tag tag-ai">IA</span><span class="tag tag-spaced">répétition espacée</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Mécanismes en flashcards cause → effet</div>
+              <div class="m-desc">Recto : "Hausse des taux →". Verso : chaîne causale complète + auteur lié. <strong>Les mécanismes sont la colonne vertébrale des 3 épreuves SES</strong> — mémorise les chaînes, pas les définitions isolées.</div>
+              <div class="tags"><span class="tag tag-spaced">répétition espacée</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subject-card">
+        <div class="bar-premiere"></div>
+        <div class="card-header">
+          <div class="subject-emoji">PC</div>
+          <div><div class="subject-name">Physique-Chimie (spécialité)</div></div>
+        </div>
+        <div class="card-body">
+          <div class="method hot">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Refaire chaque exo raté jusqu'à le réussir seul</div>
+              <div class="m-desc">Quand tu rates un exo : lis la correction, <strong>ferme-la, puis attends minimum 24h avant de refaire l'exo de zéro sans regarder.</strong> Passé ce délai, tu ne te souviens plus de la solution par cœur, tu es forcé de vraiment reconstruire le raisonnement. Si tu rates encore, recommence le surlendemain.</div>
+              <div class="tags"><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">5-10 min de réflexion, puis on avance</div>
+              <div class="m-desc">Sur un exo où tu sèches : <strong>impose-toi 5 à 10 min de réflexion active</strong> — relire l'énoncé, identifier les données, chercher quelle loi s'applique. Ce travail de débrouillage est formateur. Mais <strong>passé ce délai, ne reste pas bloqué</strong> : demande à l'IA une piste méthodologique sans la réponse, ou passe à l'exo suivant.</div>
+              <div class="tags"><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Reproduire les anciens contrôles en conditions réelles</div>
+              <div class="m-desc">Reprends chaque ancien DS : même durée, chronomètre, aucune aide. <strong>Corrige-toi toi-même avant de regarder le corrigé.</strong> L'écart entre ta note estimée et le corrigé = exactement ce que tu dois retravailler.</div>
+              <div class="tags"><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method hot">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">L'IA génère des contrôles inédits sur mesure</div>
+              <div class="m-desc"><strong>"Génère un contrôle de physique-chimie spécialité première sur [chapitre], durée 1h, avec une partie QCM, une partie calcul et une partie raisonnement. Corrige-moi ensuite question par question."</strong> Entraînement illimité sur n'importe quel chapitre.</div>
+              <div class="tags"><span class="tag tag-ai">IA</span><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Identifier le type de problème avant d'écrire</div>
+              <div class="m-desc">Avant de poser la moindre formule : <strong>force-toi à nommer le type d'exercice</strong> (cinématique, thermodynamique, optique...) et la méthode à appliquer. 30 secondes de réflexion stratégique évitent de partir dans la mauvaise direction pendant 20 min.</div>
+              <div class="tags"><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Calcul littéral systématique + vérification des unités</div>
+              <div class="m-desc">Règle non négociable : <strong>formule littérale complète avant tout chiffre.</strong> Ensuite, vérifie l'homogénéité des unités — si ça ne tombe pas juste, tu as une erreur conceptuelle, pas de calcul. En contrôle, la démarche vaut autant que le résultat.</div>
+              <div class="tags"><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">La rigueur de rédaction, non négociable</div>
+              <div class="m-desc">En physique, <strong>une réponse juste mal rédigée perd des points.</strong> Chaque étape doit être justifiée par écrit : "D'après la loi de Newton...", "En appliquant la conservation de l'énergie...". Pas de calcul qui sort de nulle part. <strong>La rigueur se travaille à chaque exercice, pas la veille du contrôle.</strong></div>
+              <div class="tags"><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subject-card">
+        <div class="bar-premiere"></div>
+        <div class="card-header">
+          <div class="subject-emoji">SV</div>
+          <div><div class="subject-name">SVT (spécialité)</div></div>
+        </div>
+        <div class="card-body">
+          <div class="method hot">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Documents SVT inédits pour s'entraîner</div>
+              <div class="m-desc"><strong>"Génère un exercice SVT première avec 2 documents inédits sur [thème]. Je vais l'analyser, puis tu évalues ma démarche scientifique."</strong> Simule exactement les conditions du bac.</div>
+              <div class="tags"><span class="tag tag-ai">IA</span><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Schémas-bilan de mémoire, puis expliqués à l'oral</div>
+              <div class="m-desc">Redessine chaque schéma entièrement de mémoire. Puis <strong>explique-le à voix haute</strong> comme si tu le présentais : chaque flèche, chaque étape, chaque lien de causalité. Si tu butes sur une flèche, tu n'as pas compris le mécanisme — seulement mémorisé la forme.</div>
+              <div class="tags"><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Tableaux comparatifs en flashcards</div>
+              <div class="m-desc">Mitose vs méiose, ADN vs ARN... <strong>Une flashcard par différence clé.</strong> Les erreurs en SVT viennent presque toujours de paires de notions proches.</div>
+              <div class="tags"><span class="tag tag-spaced">répétition espacée</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Entraîner la conclusion de démarche expérimentale</div>
+              <div class="m-desc">Après chaque exercice avec documents : rédige une conclusion en suivant <strong>bilan des résultats → réponse à la question posée → limite de l'expérience.</strong> Compétence récurrente au bac SVT que la plupart traitent trop vaguement.</div>
+              <div class="tags"><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Glossaire scientifique généré par l'IA sur Anki</div>
+              <div class="m-desc"><strong>"Génère 25 flashcards définition/terme sur [chapitre] SVT première."</strong> En SVT, un mot imprécis = points perdus. Objectif : définition parfaite en moins de 5 secondes, pour chaque notion clé du chapitre.</div>
+              <div class="tags"><span class="tag tag-ai">IA</span><span class="tag tag-spaced">répétition espacée</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subject-card">
+        <div class="bar-premiere"></div>
+        <div class="card-header">
+          <div class="subject-emoji">NS</div>
+          <div><div class="subject-name">NSI (spécialité)</div></div>
+        </div>
+        <div class="card-body">
+          <div class="method hot">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Code review guidée par l'IA</div>
+              <div class="m-desc"><strong>"Voici mon code. Ne me donne pas la solution. Dis-moi uniquement ce qui est conceptuellement faux et pourquoi."</strong> Tu corriges toi-même — ça reste.</div>
+              <div class="tags"><span class="tag tag-ai">IA</span><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Trace d'exécution à la main</div>
+              <div class="m-desc">Joue le rôle de la machine : note les valeurs de chaque variable à chaque étape sur papier. <strong>Indispensable pour les boucles imbriquées et la récursivité.</strong></div>
+              <div class="tags"><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Reconnaître les patterns des sujets NSI</div>
+              <div class="m-desc">Les sujets NSI ont des structures très récurrentes : implémentation d'algo, trace d'exécution, preuve de correction, complexité. <strong>Avant de répondre, identifie toujours le type de question.</strong> Entraîne-toi sur 5 annales en nommant les patterns avant de commencer.</div>
+              <div class="tags"><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Complexité et structures sur Anki</div>
+              <div class="m-desc">Recto : structure (liste, pile, file...). Verso : complexité des opérations clés. <strong>Récurrent en exam, mémorisé en 15 min.</strong></div>
+              <div class="tags"><span class="tag tag-spaced">répétition espacée</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subject-card">
+        <div class="bar-premiere"></div>
+        <div class="card-header">
+          <div class="subject-emoji">HG</div>
+          <div><div class="subject-name">Histoire-Géographie</div></div>
+        </div>
+        <div class="card-body">
+          <div class="method hot">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Maîtriser le plan du cours + feuille blanche</div>
+              <div class="m-desc">Apprends d'abord la structure complète du chapitre (parties, sous-parties, logique enchaînée). Puis feuille blanche : <strong>reconstitue tout le chapitre de mémoire</strong> — plan, faits, dates, acteurs, exemples. Ce qui manque sur ta feuille = ce que tu retravailles. Répète jusqu'à ce que la feuille blanche soit complète.</div>
+              <div class="tags"><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Expliquer le cours à l'oral, sans support</div>
+              <div class="m-desc">Ferme tout et explique le chapitre à voix haute comme si tu le faisais à quelqu'un qui ne connaît rien. <strong>Ce que tu bafouilles ou esquives = ce que tu n'as pas vraiment compris.</strong> Plus efficace que la feuille blanche pour détecter les faux acquis — on peut écrire des mots sans comprendre, mais on ne peut pas l'expliquer sans comprendre.</div>
+              <div class="tags"><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Croquis refait de mémoire, chronomètre en main</div>
+              <div class="m-desc">Ferme tout. Chronomètre 20 min, redessine le croquis avec figurés et légende structurée. <strong>Regarder un croquis ne sert à rien — le reproduire dans le temps imparti, oui.</strong></div>
+              <div class="tags"><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Intro de composition chronométrée (15 min)</div>
+              <div class="m-desc">Sur un sujet passé : rédige l'accroche + contextualisation + problématique + annonce de plan en <strong>15 min chrono, conditions réelles.</strong> Soumet ensuite à l'IA pour critique de la problématique et du plan.</div>
+              <div class="tags"><span class="tag tag-ai">IA</span><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Analyse de document historique : la méthode concrète</div>
+              <div class="m-desc">Sur tout document inédit (texte, affiche, caricature, carte...), applique ces étapes en 20 min chrono : <strong>(1) Présentation</strong> — nature, auteur, date, destinataire, contexte de production en 2-3 lignes. <strong>(2) Idée principale</strong> — ce que l'auteur veut montrer ou défendre, en une phrase. <strong>(3) Arguments</strong> — 2-3 idées secondaires, chacune appuyée sur une citation ou un élément précis du document. <strong>(4) Mise en perspective</strong> — lien avec le chapitre, intérêt du document, et ses limites (ce qu'il omet, le point de vue de l'auteur, la date). <strong>Ne pas paraphraser le document : l'interpréter.</strong></div>
+              <div class="tags"><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Dates, acteurs, lieux-clés sur Anki</div>
+              <div class="m-desc">Une flashcard = un fait précis. <strong>10 min par jour en répétition espacée</strong> = mémorisation durable sans session de bourrage la veille du contrôle.</div>
+              <div class="tags"><span class="tag tag-spaced">répétition espacée</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       TERMINALE
+  ══════════════════════════════════════════ -->
+    <div class="panel" id="panel-terminale">
+    <div class="legend">
+      <div class="leg-item"><div class="leg-dot" style="background:var(--ai)"></div> IA</div>
+      <div class="leg-item"><div class="leg-dot" style="background:var(--active)"></div> Rappel actif</div>
+      <div class="leg-item"><div class="leg-dot" style="background:var(--spaced)"></div> Répétition espacée</div>
+    </div>
+    <div class="section-label">Terminale — objectif bac</div>
+    <div class="subject-grid">
+
+      <div class="subject-card">
+        <div class="bar-terminale"></div>
+        <div class="card-header">
+          <div class="subject-emoji">Mx</div>
+          <div><div class="subject-name">Mathématiques</div></div>
+        </div>
+        <div class="card-body">
+          <div class="method hot">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Identifier les types de questions qui tombent au bac</div>
+              <div class="m-desc">En maths terminale, <strong>il n'y a pas 1000 types de questions différents.</strong> Fais un maximum d'annales et note dans un cahier chaque type de question rencontré : étude de fonction, suite récurrente, loi de probabilité, intégrale par parties, récurrence... Tu vas voir les mêmes schémas revenir encore et encore. <strong>Ce qui revient souvent = ce que tu maîtrises en priorité.</strong> Une fois la liste établie, entraîne-toi sur chaque type jusqu'à le reconnaître et savoir quoi faire en moins de 30 secondes.</div>
+              <div class="tags"><span class="tag tag-ai">IA</span><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Exos en boucle, cours consulté au minimum</div>
+              <div class="m-desc">En terminale, <strong>l'essentiel du temps doit être sur les exercices</strong>, pas sur le cours. Fais des exos, bloque, consulte la notion précise qui manque, refais. Le cours se consolide en pratiquant, pas en relisant.</div>
+              <div class="tags"><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Règle des 5-10 min : réfléchir, puis passer à autre chose</div>
+              <div class="m-desc">Sur un exo où tu bloques : <strong>force-toi à chercher seul 5 à 10 min.</strong> Ce temps de friction est nécessaire — il développe le réflexe de résolution. Passé ce délai sans avancer, passe au suivant ou demande à l'IA une piste, sans la solution. <strong>Rester bloqué 30 min = temps perdu.</strong></div>
+              <div class="tags"><span class="tag tag-active">rappel actif</span><span class="tag tag-ai">IA</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Annales bac chronométrées + autocorrection</div>
+              <div class="m-desc">1 sujet complet par semaine, conditions réelles. <strong>Corrige-toi toi-même avant de regarder le corrigé.</strong> L'écart entre les deux = exactement ce que tu dois réviser.</div>
+              <div class="tags"><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Journal d'erreurs actif</div>
+              <div class="m-desc">Pour chaque exo raté, note dans un cahier dédié : <strong>type d'erreur (calcul, raisonnement, méthode) → cause racine → règle à retenir.</strong> Relis ce journal la veille de chaque exam, pas tes cours. Ce que tu rates régulièrement = ce qui peut te coûter des points. Ce que tu réussis déjà = ne pas perdre de temps à le réviser.</div>
+              <div class="tags"><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Flashcards formules, propriétés et définitions sur Anki</div>
+              <div class="m-desc">Une flashcard par élément clé à mémoriser : formules (dérivées, primitives, trigonométrie...), propriétés (limites, continuité, suites...), définitions (convergence, probabilité conditionnelle...). <strong>Génère-les avec l'IA : "Fais-moi des flashcards sur [chapitre] en maths terminale, avec la formule ou définition au recto et un exemple d'application au verso."</strong> 10 min par jour sur Anki = plus jamais de trou en exam.</div>
+              <div class="tags"><span class="tag tag-ai">IA</span><span class="tag tag-spaced">répétition espacée</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subject-card">
+        <div class="bar-terminale"></div>
+        <div class="card-header">
+          <div class="subject-emoji">Ph</div>
+          <div><div class="subject-name">Philosophie</div></div>
+        </div>
+        <div class="card-body">
+          <div class="method hot">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Faire des plans détaillés sur sujets passés</div>
+              <div class="m-desc">Prends un sujet au hasard dans les annales. En 1h, produis un plan complet : <strong>problématique + plan en 3 parties avec sous-parties, argument principal de chaque sous-partie et exemple philosophique associé.</strong> Soumet ensuite à l'IA : <strong>"Voici mon plan de dissertation philo sur [sujet]. Évalue ma problématique (est-elle trop large, circulaire, évidente ?), la progression logique des parties, la pertinence des exemples, et dis-moi les 2-3 points les plus faibles."</strong> C'est la compétence la plus entraînable et la plus déterminante en philo.</div>
+              <div class="tags"><span class="tag tag-ai">IA</span><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">S'entraîner à l'explication de texte</div>
+              <div class="m-desc">L'autre épreuve possible au bac. Sur un texte au programme, applique cette méthode : <strong>(1) Identifier la thèse</strong> — ce que l'auteur affirme en une phrase. <strong>(2) Découper le texte en mouvements</strong> — 3-4 étapes logiques par lesquelles l'auteur développe son argument. <strong>(3) Expliquer chaque mouvement</strong> : reformuler l'idée, citer le texte, analyser le vocabulaire philosophique clé. <strong>(4) Dégager le présupposé</strong> — ce que l'auteur tient pour acquis sans le démontrer. <strong>(5) Conclure</strong> : thèse, intérêt philosophique, ouverture vers une notion ou un autre auteur. Ensuite soumet à l'IA : <strong>"Voici mon explication de ce texte de [auteur]. Est-ce que j'ai bien identifié la thèse et les mouvements ? Qu'est-ce que j'ai raté ou mal formulé ?"</strong></div>
+              <div class="tags"><span class="tag tag-ai">IA</span><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Défendre une thèse puis son contraire à voix haute</div>
+              <div class="m-desc">Prends une notion (la liberté, le temps, la justice...). Défends le oui pendant 2 min à voix haute, puis le non. <strong>Si tu ne trouves pas d'arguments solides des deux côtés, tu ne peux pas traiter un sujet sur cette notion en exam.</strong> Ça force à dépasser la première idée qui vient et à construire une pensée dialectique réelle.</div>
+              <div class="tags"><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Fiches auteurs : thèse + œuvre + exemple concret</div>
+              <div class="m-desc">Recto : philosophe. Verso : thèse en 1 phrase + œuvre + exemple d'application dans une dissertation + critique possible. <strong>Génère-les avec l'IA, vérifie, révise sur Anki.</strong> Objectif : mobiliser un auteur pertinent en moins de 10 secondes sur n'importe quel sujet.</div>
+              <div class="tags"><span class="tag tag-ai">IA</span><span class="tag tag-spaced">répétition espacée</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subject-card">
+        <div class="bar-terminale"></div>
+        <div class="card-header">
+          <div class="subject-emoji">SE</div>
+          <div><div class="subject-name">SES (spécialité)</div></div>
+        </div>
+        <div class="card-body">
+          <div class="method hot">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Simulation complète EC1/EC2/dissertation</div>
+              <div class="m-desc"><strong>"Génère un sujet complet de SES terminale : une EC1, une EC2 avec doc statistique, et une dissertation. Évalue mes réponses avec les critères réels du bac."</strong> Le seul vrai entraînement.</div>
+              <div class="tags"><span class="tag tag-ai">IA</span><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">EC2 : maîtriser la lecture de données</div>
+              <div class="m-desc">Structure immuable : <strong>présentation du doc → lecture de la donnée la plus importante (avec chiffre précis) → variation/évolution → interprétation avec un mécanisme → limite ou nuance.</strong> Entraîne-toi sur un doc par jour.</div>
+              <div class="tags"><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Dissertation : 1 plan complet par semaine</div>
+              <div class="m-desc">Sur un sujet passé : plan détaillé en 30 min, avec auteurs + chiffres + mécanismes pour chaque argument. <strong>Soumets le plan à l'IA pour critique avant de rédiger.</strong> À partir de janvier : 1 dissertation entière par semaine.</div>
+              <div class="tags"><span class="tag tag-ai">IA</span><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Auteurs + chiffres-clés sur Anki</div>
+              <div class="m-desc">Recto : auteur (ex. Keynes). Verso : thèse + œuvre + chiffre ou fait concret associé. <strong>En dissertation, citer un auteur précis avec sa thèse = copie qui se démarque immédiatement.</strong></div>
+              <div class="tags"><span class="tag tag-spaced">répétition espacée</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subject-card">
+        <div class="bar-terminale"></div>
+        <div class="card-header">
+          <div class="subject-emoji">PC</div>
+          <div><div class="subject-name">Physique-Chimie (spécialité)</div></div>
+        </div>
+        <div class="card-body">
+          <div class="method hot">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">L'IA simule le correcteur sur ta démarche</div>
+              <div class="m-desc"><strong>"Je résous ce problème étape par étape en justifiant tout. Joue le rôle d'un correcteur de bac : note chaque étape, signale les erreurs de raisonnement même si le résultat est bon."</strong></div>
+              <div class="tags"><span class="tag tag-ai">IA</span><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Labolycée : faire tous les sujets de bac</div>
+              <div class="m-desc"><strong>labolycee.org</strong> regroupe tous les sujets de bac physique-chimie corrigés, classés par thème. La méthode : fais <strong>tous les sujets disponibles sur chaque chapitre</strong> — pas quelques-uns. Les sujets se ressemblent d'une année à l'autre, les schémas de questions se répètent. Plus tu en fais, plus tu les reconnais en exam.</div>
+              <div class="tags"><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Règle des 5-10 min : réfléchir, puis avancer</div>
+              <div class="m-desc">Sur un exo où tu bloques : <strong>impose-toi 5 à 10 min de réflexion active</strong> — relire, identifier les données, chercher la bonne séquence de raisonnement. Ce temps de friction est formateur. <strong>Passé ce délai, ne reste pas bloqué</strong> : demande à l'IA une piste sans la réponse, ou passe à l'exo suivant.</div>
+              <div class="tags"><span class="tag tag-active">rappel actif</span><span class="tag tag-ai">IA</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Maîtriser les méthodes, pas les formules</div>
+              <div class="m-desc">Pour chaque type de problème, mémorise la <strong>séquence de raisonnement</strong> : "mécanique Newton → bilan forces → choix de repère → projection → équation → résolution." La formule découle de la méthode, jamais l'inverse.</div>
+              <div class="tags"><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Refaire chaque exo raté après 24h, de zéro</div>
+              <div class="m-desc">Quand tu rates un exo : lis la correction, <strong>ferme-la, puis attends minimum 24h avant de refaire de zéro sans regarder.</strong> Passé ce délai, tu ne te souviens plus de la solution par cœur — tu es forcé de vraiment reconstruire le raisonnement.</div>
+              <div class="tags"><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Rigueur de rédaction à chaque exercice</div>
+              <div class="m-desc">Chaque étape doit être justifiée par écrit : "D'après la loi de Newton...", "En appliquant la conservation de l'énergie...", "Par définition de...". <strong>Pas de calcul qui sort de nulle part.</strong> Au bac, le correcteur suit ta démarche ligne par ligne — une étape injustifiée = points perdus même si le résultat est bon.</div>
+              <div class="tags"><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subject-card">
+        <div class="bar-terminale"></div>
+        <div class="card-header">
+          <div class="subject-emoji">SV</div>
+          <div><div class="subject-name">SVT (spécialité)</div></div>
+        </div>
+        <div class="card-body">
+          <div class="method hot">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Sujet bac SVT inédit généré par l'IA</div>
+              <div class="m-desc"><strong>"Génère un sujet bac SVT terminale complet sur [thème] avec 2 documents inédits. Je le traite entièrement, puis tu évalues ma démarche scientifique avec les critères du bac."</strong></div>
+              <div class="tags"><span class="tag tag-ai">IA</span><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Schémas-bilan à blanc + expliqués à l'oral</div>
+              <div class="m-desc">Redessine le schéma-bilan du chapitre de mémoire une fois par semaine. Puis <strong>explique-le à voix haute</strong> : chaque flèche, chaque étape, chaque causalité. Ce que tu ne peux pas expliquer oralement, tu ne pourras pas le rédiger en exam sous pression.</div>
+              <div class="tags"><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Tableaux comparatifs terminale en flashcards</div>
+              <div class="m-desc">Immunité innée vs adaptative, lymphocyte B vs T, neurone moteur vs sensitif... <strong>Une flashcard par différence clé.</strong> Les confusions entre notions proches sont la première source d'erreurs en SVT bac.</div>
+              <div class="tags"><span class="tag tag-spaced">répétition espacée</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Exploiter un résultat expérimental en 4 étapes</div>
+              <div class="m-desc">Face à un graphe ou tableau de résultats : <strong>lire (extraire la donnée chiffrée) → décrire la tendance → interpréter avec un mécanisme biologique → formuler une limite.</strong> Entraîne-toi à rédiger cette séquence sur tous les documents du cours.</div>
+              <div class="tags"><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Vocabulaire scientifique sur Anki</div>
+              <div class="m-desc"><strong>"Génère 30 flashcards définition/terme sur [chapitre] SVT terminale."</strong> Un mot imprécis en exam = points perdus. Objectif : définition parfaite en moins de 5 secondes.</div>
+              <div class="tags"><span class="tag tag-ai">IA</span><span class="tag tag-spaced">répétition espacée</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subject-card">
+        <div class="bar-terminale"></div>
+        <div class="card-header">
+          <div class="subject-emoji">GO</div>
+          <div><div class="subject-name">Grand Oral</div></div>
+        </div>
+        <div class="card-body">
+          <div class="method hot">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Jury simulé par l'IA, en boucle</div>
+              <div class="m-desc"><strong>"Tu es un jury de Grand Oral bac. Ma question est [question]. Je présente 5 min. Pose-moi ensuite 3 questions déstabilisantes et évalue ma prestation sur les critères officiels."</strong> Répète jusqu'à aisance totale — minimum 20 simulations.</div>
+              <div class="tags"><span class="tag tag-ai">IA</span><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Se filmer, s'analyser, corriger</div>
+              <div class="m-desc">Enregistre-toi. Regarde avec ce filtre : tics de langage, regard fuyant, débit, posture. <strong>Identifie 1 défaut par session, travaille-le, recommence.</strong> La vidéo révèle ce que l'oreille ne capte pas.</div>
+              <div class="tags"><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">20 questions d'entretien anticipées</div>
+              <div class="m-desc"><strong>"Ma question Grand Oral est [question]. Génère 20 questions de jury, des plus simples aux plus déstabilisantes."</strong> Entraîne-toi à répondre à chacune en 1-2 min.</div>
+              <div class="tags"><span class="tag tag-ai">IA</span><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Construire une transition vers l'entretien</div>
+              <div class="m-desc">Les 30 dernières secondes de ta présentation sont cruciales : <strong>clôture sur un angle fort qui invite les questions que tu maîtrises.</strong> Ne finis pas en suspens — donne au jury un point d'entrée précis. Prépare 3 formulations avec l'IA et choisis la meilleure.</div>
+              <div class="tags"><span class="tag tag-ai">IA</span><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">3 versions chronométrées : 5 / 10 / 15 min</div>
+              <div class="m-desc">Maîtrise les 3 durées. <strong>Le jour J, tu adapteras au feeling du jury.</strong> Savoir que tu peux tenir n'importe quelle durée = confiance que rien d'autre ne donne.</div>
+              <div class="tags"><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subject-card">
+        <div class="bar-terminale"></div>
+        <div class="card-header">
+          <div class="subject-emoji">HG</div>
+          <div><div class="subject-name">Histoire-Géographie</div></div>
+        </div>
+        <div class="card-body">
+          <div class="method hot">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Plan du cours + feuille blanche</div>
+              <div class="m-desc">Apprends d'abord la structure complète du chapitre. Puis feuille blanche : <strong>reconstitue tout le chapitre de mémoire</strong> — plan, faits, dates, acteurs, exemples, mécanismes. Ce qui manque = ce que tu retravailles. Répète jusqu'à ce que la feuille soit complète.</div>
+              <div class="tags"><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Expliquer le chapitre à l'oral, sans support</div>
+              <div class="m-desc">Ferme tout, explique le chapitre à voix haute comme si tu le présentais à quelqu'un. <strong>Ce que tu bafouilles ou esquives = ce que tu n'as pas vraiment compris.</strong> Encore plus révélateur que la feuille blanche — on ne peut pas expliquer ce qu'on ne comprend pas vraiment.</div>
+              <div class="tags"><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Critique de plan par l'IA</div>
+              <div class="m-desc">Propose un plan en 10 min : <strong>"Critique ce plan — progression logique, équilibre des parties, pertinence des exemples, lien avec le sujet. Propose ce qui manque."</strong></div>
+              <div class="tags"><span class="tag tag-ai">IA</span><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Croquis à blanc, 20 min max</div>
+              <div class="m-desc">Redessine de mémoire avec légende structurée. <strong>3 fois par semaine</strong> sur les croquis probables — la régularité prime sur les sessions intensives de dernière minute.</div>
+              <div class="tags"><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Analyse de document inédit chronométrée (25 min)</div>
+              <div class="m-desc">Sur un document que tu n'as jamais vu, applique cette méthode stricte en 25 min chrono. <strong>(1) Présentation</strong> : nature du document, auteur/émetteur, date, destinataire, contexte de production. <strong>(2) Idée principale</strong> : ce que l'auteur veut démontrer ou exprimer, en une phrase. <strong>(3) Arguments</strong> : les 2-3 idées secondaires avec une citation courte à l'appui pour chacune. <strong>(4) Mise en perspective</strong> : lien avec le cours, intérêt historique du document, et ses limites — ce qu'il ne dit pas ou ce qui biaise le propos. <strong>Ne pas paraphraser : interpréter.</strong></div>
+              <div class="tags"><span class="tag tag-active">rappel actif</span></div>
+            </div>
+          </div>
+          <div class="method">
+            <div class="m-icon">✦</div>
+            <div class="m-body">
+              <div class="m-title">Exemples historiques précis sur Anki</div>
+              <div class="m-desc">Recto : thème (ex. "décolonisation violente"). Verso : cas précis + dates + contexte en 3 lignes. <strong>En composition, les exemples précis font la différence entre 12 et 16.</strong></div>
+              <div class="tags"><span class="tag tag-spaced">répétition espacée</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function switchTab(tab) {
+    document.querySelectorAll('.main-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelector(`[data-tab="${tab}"]`).classList.add('active');
+    document.getElementById(`panel-${tab}`).classList.add('active');
+  }
+</script>
+</body>
+</html>
